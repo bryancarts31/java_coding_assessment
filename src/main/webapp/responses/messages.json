@@ -1,0 +1,8 @@
+{
+  "required": "PLease Input your credentials",
+  "failed":"Invalid username or password",
+  "success-login": "Welcome back, User!",
+  "existing-username": "Username is existing",
+  "existing-email": "Email is existing",
+  "success-register": "User registered successfully!"
+}

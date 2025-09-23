@@ -1,5 +1,7 @@
 package model.authentication;
 
+import org.json.JSONObject;
+
 public class RegisterModel {
     private int Id;
     private String Username;
@@ -46,5 +48,14 @@ public class RegisterModel {
 
     public void setEmail(String email) {
         Email = email;
+    }
+
+    public JSONObject saveToJson(){
+        JSONObject obj = new JSONObject();
+        obj.put("id",Id);
+        obj.put("username",Username);
+        obj.put("password",Password);
+        obj.put("email",Email);
+        return obj;
     }
 }

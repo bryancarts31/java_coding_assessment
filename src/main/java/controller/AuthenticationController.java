@@ -1,7 +1,7 @@
 package controller;
 
 import model.authentication.RegisterModel;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +10,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import model.response.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import util.MessageLoader;
 
 
 public class AuthenticationController extends HttpServlet {
@@ -46,19 +49,32 @@ public class AuthenticationController extends HttpServlet {
            Files.write(Paths.get(FILE_PATH),"[]".getBytes());
        }
 
-
         String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
-         JSONArray users = new JSONArray(content);
+        Response jresponse = null;
+        JSONArray users = new JSONArray(content);
 
          for(int i = 0; i<users.length(); i++){
              JSONObject user = users.getJSONObject(i);
              if(user.getString("username").equals(username)){
-
+                String message = MessageLoader.get("existing-username");
+                jresponse = new Response("existing",message);
+             } else if (user.getString("email").equals(email)) {
+                 String message = MessageLoader.get("existing-email");
+                 jresponse = new Response("existing",message);
+             }else{
+                 String message = MessageLoader.get("success-register");
+                 jresponse = new Response("success",message);
              }
          }
 
         int generateId = users.length() + 1;
-         RegisterModel user = new RegisterModel(generateId,username,password,confirmPassword,email);
+        RegisterModel createUser = new RegisterModel(generateId,username,password,confirmPassword,email);
+
+        users.put(createUser.saveToJson());
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonMessage = mapper.writeValueAsString(jresponse);
+        response.getWriter().write(jsonMessage);
     }
 
     private void loginUser(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException{
