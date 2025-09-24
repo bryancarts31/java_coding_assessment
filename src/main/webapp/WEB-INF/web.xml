@@ -4,4 +4,14 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+      <servlet-name>RegisterController</servlet-name>
+     <servlet-class>controller.RegisterController</servlet-class>
+  </servlet>
+
+  <welcome-file-list>
+    <welcome-file>register</welcome-file>
+  </welcome-file-list>
+
 </web-app>

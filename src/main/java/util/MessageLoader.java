@@ -9,7 +9,7 @@ public class MessageLoader {
     private static Map<String, String> messages;
 
     static {
-        try (InputStream is = MessageLoader.class.getResourceAsStream("/responses/messages.json")) {
+        try (InputStream is = MessageLoader.class.getClassLoader().getResourceAsStream("responses/messages.json")) {
             ObjectMapper mapper = new ObjectMapper();
             messages = mapper.readValue(is, Map.class);
         } catch (IOException e) {
