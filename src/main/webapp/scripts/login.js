@@ -32,9 +32,16 @@ function responseValidation(data) {
     try {
         const response = JSON.parse(data);
         message.textContent = response.message;
+        message.className = '';
+        if(response.status === 'success-login'){
+            message.classList.add("text-success");
+        }else{
+            message.classList.add("text-danger");
+        }
     } catch (e) {
         console.error('Invalid JSON from server:', data);
         message.textContent = "Unexpected server response.";
+        message.className = "text-warning";
     }
 }
 
