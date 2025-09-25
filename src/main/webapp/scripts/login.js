@@ -1,7 +1,7 @@
 var username = document.getElementById("username");
 var password = document.getElementById("password");
 var message = document.getElementById("validation-message");
-var btnReg = document.querySelector(".btnLog");
+var btnReg = document.querySelector(".btnSubmit ");
 
 btnReg.addEventListener("click",(e)=>{
     e.preventDefault();

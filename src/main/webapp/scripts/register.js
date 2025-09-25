@@ -4,7 +4,7 @@ var con_password = document.getElementById("con-password");
 var email = document.getElementById("email");
 var message = document.getElementById("validation-message");
 
-var btnReg = document.querySelector(".btnReg");
+var btnReg = document.querySelector(".btnSubmit ");
 
 btnReg.addEventListener("click", (e) => {
     e.preventDefault();

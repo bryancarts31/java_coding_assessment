@@ -6,30 +6,44 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
+    <link rel="stylesheet" href="../../styles/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../styles/css/global.css">
 </head>
 <body>
-    <div class="container">
-        <span id="validation-message"></span>
-        <div class="title">Login Page</div>
-        <div class="form-style">
-            <form method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Input Your Username">
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="row border rounder-5 p-3 bg-white shadow box-area">
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
+                <div class="featured-image">
+                    <img src="../../images/logo1.png" alt="logo" class="img-fluid">
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Input Your Password">
+
+            </div>
+            <div class="col-md-6 right-box" >
+                <span id="validation-message"></span>
+                <div class="title mb-4">
+                    <p>Login Page</p>
+                    <p>Hello!</p>
                 </div>
-                <div class="mb-3">
-                    <a href="/register">Create your account</a>
+                <div class="form-style">
+                    <form method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" id="username" placeholder="Username">
+                        </div>
+                        <div class="mb-1">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6" id="password" placeholder="Password">
+                        </div>
+<!--                        <div class="mb-5 d-flex justify-content-between">-->
+<!--                            <a href="/register">Create your account</a>-->
+<!--                        </div>-->
+                        <div class="mb-3">
+                            <button type="submit" class="btnSubmit w-100 fs-6">Login Account</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <button type="submit" class="btnLog">Login Account</button>
-                </div>
-            </form>
+            </div>
+            </div>
         </div>
-    </div>
+
 
     <script src="../../scripts/login.js"></script>
 </body>
