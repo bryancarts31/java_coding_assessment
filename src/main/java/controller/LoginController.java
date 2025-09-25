@@ -38,7 +38,6 @@ public class LoginController extends HttpServlet {
                         user.getPassword().equals(password));
 
         Response jresponse = null;
-        boolean isSuccess = false;
 
         if(found){
             String message = MessageLoader.get("success-login");
