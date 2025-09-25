@@ -40,7 +40,7 @@ function responseValidation(data) {
         setTimeout(()=>{
             console.log(response.redirectUrl);
             window.location.href = response.redirectUrl;
-        },1000);
+        },500);
        }
     } catch (e) {
         console.error('Invalid JSON from server:', data);

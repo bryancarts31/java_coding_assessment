@@ -6,5 +6,6 @@
   "existing-email": "An account with this email already exists.",
   "success-register": "Registration successful! You can now log in.",
   "password-length": "Your password must be at least 6 characters long.",
-  "password-mismatch": "Passwords do not match. Please re-enter them."
+  "password-mismatch": "Passwords do not match. Please re-enter them.",
+  "invalid-format": "Please include an @ in the email address."
 }

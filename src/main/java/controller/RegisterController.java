@@ -34,6 +34,7 @@ public class RegisterController extends HttpServlet {
         String email = request.getParameter("email");
 
         String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
+        String EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
         JSONArray users = new JSONArray(content);
 
         if(isEmpty(username,password,confirmPassword,email)){
@@ -44,6 +45,9 @@ public class RegisterController extends HttpServlet {
             return;
         } if (!password.equals(confirmPassword)) {
             SendResponse.sendResponse(response, new Response(MessageKeys.PASSWORD_MISMATCH, MessageLoader.get(MessageKeys.PASSWORD_MISMATCH)));
+            return;
+        }if(!email.matches(EMAIL_REGEX)){
+            SendResponse.sendResponse(response, new Response(MessageKeys.INVALID_EMAIL, MessageLoader.get(MessageKeys.INVALID_EMAIL)));
             return;
         }
 
