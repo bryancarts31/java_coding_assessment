@@ -1,11 +1,12 @@
 package controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import model.authentication.RegisterModel;
 import model.response.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import util.MessageKeys;
 import util.MessageLoader;
+import util.SendResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,60 +27,53 @@ public class RegisterController extends HttpServlet {
         requestDispatcher.forward(request,response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         String email = request.getParameter("email");
 
-        if(!password.equals(confirmPassword)){
-            response.getWriter().write("Passwords do not match");
+        String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
+        JSONArray users = new JSONArray(content);
+
+        if(isEmpty(username,password,confirmPassword,email)){
+            SendResponse.sendResponse(response, new Response(MessageKeys.REQUIRED, MessageLoader.get(MessageKeys.REQUIRED)));
+            return;
+        }if(password.length() < 6){
+            SendResponse.sendResponse(response, new Response(MessageKeys.PASSWORD_LENGTH, MessageLoader.get(MessageKeys.PASSWORD_LENGTH)));
+            return;
+        } if (!password.equals(confirmPassword)) {
+            SendResponse.sendResponse(response, new Response(MessageKeys.PASSWORD_MISMATCH, MessageLoader.get(MessageKeys.PASSWORD_MISMATCH)));
             return;
         }
-
-        File file = new File(FILE_PATH);
-        if (!file.exists()){
-            file.createNewFile();
-            Files.write(Paths.get(FILE_PATH),"[]".getBytes());
-        }
-
-        String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
-        Response jresponse = null;
-        boolean isExisting = false;
-        JSONArray users = new JSONArray(content);
 
         for(int i = 0; i<users.length(); i++){
             JSONObject user = users.getJSONObject(i);
             if(user.getString("username").equals(username)){
-                String message = MessageLoader.get("existing-username");
-                jresponse = new Response("existing-username",message);
-                isExisting = true;
-                break;
+                SendResponse.sendResponse(response, new Response(MessageKeys.EXISTING_USERNAME, MessageLoader.get(MessageKeys.EXISTING_USERNAME)));
+                return;
             } else if (user.getString("email").equals(email)) {
-                String message = MessageLoader.get("existing-email");
-                jresponse = new Response("existing-email",message);
-                isExisting = true;
-                break;
+                SendResponse.sendResponse(response, new Response(MessageKeys.EXISTING_EMAIL, MessageLoader.get(MessageKeys.EXISTING_EMAIL)));
+                return;
             }
         }
 
-        if(!isExisting){
-            int generateId = users.length() + 1;
-            RegisterModel createUser = new RegisterModel(generateId,username,password,confirmPassword,email);
+        int generateId = users.length() + 1;
+        RegisterModel createUser = new RegisterModel(generateId,username,password,confirmPassword,email);
+        users.put(createUser.saveToJson());
 
-            users.put(createUser.saveToJson());
+        Files.write(Paths.get(FILE_PATH), users.toString().getBytes());
 
-            Files.write(Paths.get(FILE_PATH), users.toString().getBytes());
-
-            String message = MessageLoader.get("success-register");
-            jresponse = new Response("success", message);
-            jresponse.setRedirectUrl("/login");
-        }
-
-        response.setContentType("application/json");
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonMessage = mapper.writeValueAsString(jresponse);
-        response.getWriter().write(jsonMessage);
+        Response success = new Response(MessageKeys.SUCCESS_REGISTER,MessageLoader.get(MessageKeys.SUCCESS_REGISTER));
+        success.setRedirectUrl("/login");
+        SendResponse.sendResponse(response,success);
     }
 
+    private boolean isEmpty(String... fields){
+        for(String field: fields){
+            if(field == null || field.trim().isEmpty())
+                return true;
+        }
+        return false;
+    }
 }
