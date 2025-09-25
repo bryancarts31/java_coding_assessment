@@ -1,8 +1,10 @@
 {
-  "required": "Please input your credentials.",
-  "failed": "Invalid username or password.",
-  "success-login": "Welcome back, User!",
-  "existing-username": "Username already exists.",
-  "existing-email": "Email already exists.",
-  "success-register": "User registered successfully!"
+  "required": "All fields are required. Please fill in your credentials.",
+  "failed": "Incorrect username or password. Please try again.",
+  "success-login": "Welcome back! You've successfully logged in.",
+  "existing-username": "This username is already taken. Please choose another.",
+  "existing-email": "An account with this email already exists.",
+  "success-register": "Registration successful! You can now log in.",
+  "password-length": "Your password must be at least 6 characters long.",
+  "password-mismatch": "Passwords do not match. Please re-enter them."
 }

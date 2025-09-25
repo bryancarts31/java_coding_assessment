@@ -35,6 +35,13 @@ function responseValidation(data) {
     try {
         const response = JSON.parse(data);
         message.textContent = response.message;
+
+        if(response.status === 'success-register' && response.redirectUrl){
+        setTimeout(()=>{
+            console.log(response.redirectUrl);
+            window.location.href = response.redirectUrl;
+        },1000);
+       }
     } catch (e) {
         console.error('Invalid JSON from server:', data);
         message.textContent = "Unexpected server response.";

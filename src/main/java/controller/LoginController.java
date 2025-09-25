@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.authentication.LoginModel;
 import model.response.Response;
+import util.MessageKeys;
 import util.MessageLoader;
+import util.SendResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,19 +39,12 @@ public class LoginController extends HttpServlet {
                 .anyMatch(user -> user.getUsername().equals(username) &&
                         user.getPassword().equals(password));
 
-        Response jresponse = null;
 
         if(found){
-            String message = MessageLoader.get("success-login");
-            jresponse = new Response("success",message);
-
+            SendResponse.sendResponse(response, new Response(MessageKeys.SUCCESS_LOGIN, MessageLoader.get(MessageKeys.SUCCESS_LOGIN)));
         } else {
-            String message = MessageLoader.get("failed");
-            jresponse = new Response("failed",message);
+            SendResponse.sendResponse(response, new Response(MessageKeys.FAILED, MessageLoader.get(MessageKeys.FAILED)));
         }
-        response.setContentType("application/json");
-        String jsonMessage = mapper.writeValueAsString(jresponse);
-        response.getWriter().write(jsonMessage);
     }
 
 }

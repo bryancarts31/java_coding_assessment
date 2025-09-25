@@ -8,4 +8,6 @@ public class MessageKeys {
     public static final String EXISTING_EMAIL = "existing-email";
     public static final String SUCCESS_REGISTER = "success-register";
     public static final String INVALID_EMAIL = "invalid-email";
+    public static final String SUCCESS_LOGIN = "success-login";
+    public static final String FAILED = "failed";
 }
