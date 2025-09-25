@@ -9,6 +9,7 @@ public class RegisterModel {
     private String ConfirmPassword;
     private String Email;
 
+    public RegisterModel(){};
     public RegisterModel(int id,String username, String password,String confirmPassword,String email){
         this.Id = id;
         this.Username = username;

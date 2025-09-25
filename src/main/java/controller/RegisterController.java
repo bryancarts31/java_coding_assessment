@@ -74,6 +74,7 @@ public class RegisterController extends HttpServlet {
 
             String message = MessageLoader.get("success-register");
             jresponse = new Response("success", message);
+            jresponse.setRedirectUrl("/login");
         }
 
         response.setContentType("application/json");
