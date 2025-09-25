@@ -1,0 +1,66 @@
+body{
+    font-family: 'Poppins', 'sans-serif';
+    background: #ececec;
+}
+
+.left-box{
+    background-color:#299160;
+}
+.title{
+  font-size: 1.2rem;
+}
+.featured-image img{
+    width:250px;
+}
+.featured-image p{
+    font-family:'Courier New', Courier,monospace;
+    font-weight: 600;
+}
+.featured-image small{
+    font-family:'Courier New', Courier,monospace;
+    width:17rem;
+}
+
+.right-box{
+    padding:40px 30px 40px 30px
+}
+
+.btnSubmit{
+    background:#00ab5c;
+    color:white;
+    padding:5px;
+    border-radius:5px;
+    border-style:none;
+}
+
+.btnSubmit:hover{
+    background:#009652;
+    color:white;
+    padding:5px;
+    border-radius:5px;
+    border-style:none;
+}
+
+::placeholder{
+    font-size:16px;
+}
+
+#validation-message{
+    font-size:12px;
+    color:#DC143C;
+}
+
+@media only screen and (max-width: 400px){
+    .box-area{
+        margin:0 10px;
+    }
+
+    .left-box{
+        height:100px;
+        overflow:hidden;
+    }
+
+    .right-box{
+        padding:20px;
+    }
+}

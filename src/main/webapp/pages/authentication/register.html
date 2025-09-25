@@ -7,33 +7,55 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
     <link rel="stylesheet" href="../../styles/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../styles/css/global.css">
+    <link rel="stylesheet" href="../../styles/css/register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <div class="container">
-        <span id="validation-message"></span>
-        <div class="title">Register Page</div>
-        <div class="form-style">
-            <form action="" method="post">
-                <div class="mb-3">
-                    <label class="form-label" for="username">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Input your username">
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="row border rounder-5 p-3 bg-white shadow box-area">
+        <div class="col-md-4 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
+            <div class="featured-image">
+                <img src="../../images/logo1.png" alt="logo" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-md-8 right-box">
+            <div class="title mb-4">
+                <p>Welcome!</p>
+                <p>Create your account</p>
+            </div>
+            <span id="validation-message"></span>
+            <div class="form-style">
+            <form method="post">
+                <div class="row">
+                    <div class="mb-3">
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" id="username" placeholder="Username">
+                    </div>
+                 <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6" id="password" placeholder="Password">
+                        </div>
+                 </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6" id="con-password" placeholder="Confirm Password">
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="password">Password</label>
-                    <input type="text" class="form-control" id="password" placeholder="Input your password">
+                    <input type="email" class="form-control form-control-lg bg-light fs-6" id="email" placeholder="Email Address">
+                </div> <div class="mt-3 mb-3">
+                <button type="submit" class="btnSubmit w-100 fs-6">Register Account</button>
+            </div>
+                <div class="row">
+                    <small>Already have an account? <a href="/login">Login</a></small>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="con-password">Confirm Password</label>
-                    <input type="text" class="form-control" id="con-password" placeholder="Input your confirm password">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com">
-                </div>
-                <button type="submit" class="btnSubmit ">Register Account</button>
             </form>
         </div>
+        </div>
     </div>
+</div>
 
     <script src="../../scripts/register.js"></script>
 </body>
